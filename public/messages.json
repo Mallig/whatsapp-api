@@ -1,0 +1,24 @@
+{
+    "messages": [
+        {
+            "id": 1,
+            "content": "Message 1 Content",
+            "sender": "Mallig"
+        },
+        {
+            "id":2,
+            "content": "Message 2 Content",
+            "sender": "HugoDaBoss"
+        },
+        {
+            "id":3,
+            "content": "Message 3 Content",
+            "sender": "Tobe"
+        },
+        {
+            "id":4,
+            "content": "Message 4 Content",
+            "sender": "Mallig"
+        }
+    ]
+}
