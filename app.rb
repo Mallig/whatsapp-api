@@ -2,7 +2,7 @@ require 'sinatra'
 require "./lib/controllers/users"
 
 class WhatsAppAPI < Sinatra::Base
-    use Users
+    use UsersController
     get "/" do
         "Hello World, from API"
     end 

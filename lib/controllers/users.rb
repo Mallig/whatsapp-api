@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
 
-class Users < Sinatra::Base
+class UsersController < Sinatra::Base
 
     file = File.read('public/users.json')
     data_hash = JSON.parse(file)
@@ -12,6 +12,7 @@ class Users < Sinatra::Base
     end
 
     get '/users/:id' do
+        content_type :json
         id = params[:id].to_i
 
         data_hash["users"].each do |user|

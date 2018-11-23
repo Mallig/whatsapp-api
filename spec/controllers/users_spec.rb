@@ -2,14 +2,14 @@ require 'spec_helper'
 require_relative '../../lib/controllers/users'
 
 
-describe "Users" do
+describe "UsersController" do
     before(:each) do
         users = File.read('public/users.json')
         @users_json = JSON.parse(users)
     end
 
     def app
-        Users.new
+        UsersController.new
     end
 
     describe "GET /users" do
