@@ -1,25 +1,21 @@
 require 'sinatra'
 require 'json'
+require './lib/models/user'
 
 class UsersController < Sinatra::Base
 
-    file = File.read('public/users.json')
-    data_hash = JSON.parse(file)
+    user = User.new
 
     get '/users' do
         content_type :json
-        data_hash.to_json
+        user.all.to_json
     end
 
     get '/users/:id' do
         content_type :json
-        id = params[:id].to_i
 
-        data_hash["users"].each do |user|
-            if (user["id"] == id)
-                return user.to_json
-            end
-        end
+        id = params[:id].to_i
+        user.find(id).to_json
     end
 
 end
