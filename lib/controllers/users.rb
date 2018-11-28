@@ -10,6 +10,10 @@ class UsersController < Sinatra::Base
         user = User.new
         user.all.to_json
     end
+
+    post '/users' do
+
+    end
     
     get '/users/:id' do
         content_type :json

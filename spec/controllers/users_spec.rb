@@ -40,4 +40,11 @@ describe "UsersController" do
         end
     end
 
+    describe "POST /users" do
+        it "connects successfully" do
+            post 'http://localhost:9292/users'
+            expect(last_response).to be_ok
+        end
+    end
+
 end
