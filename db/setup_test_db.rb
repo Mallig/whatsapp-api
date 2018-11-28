@@ -1,5 +1,8 @@
 require 'pg'
-require './db/table_pops'
+
+def users_pop
+    JSON.parse(File.read('public/users.json'))["users"]
+end
 
 def reset_table(database, table)
     connection = PG.connect(dbname:database)
@@ -10,7 +13,7 @@ end
 
 def populate_users_table
     connection = PG.connect(dbname:'whatsapp-test')
-    $users_pop.each do |row|
-        connection.exec("INSERT INTO users (name, password) VALUES ('#{row[0]}', '#{row[1]}');")
+    users_pop.each do |row|
+        connection.exec("INSERT INTO users (name, password) VALUES ('#{row["name"]}', '#{row["password"]}');")
     end
 end
