@@ -12,13 +12,16 @@ class UsersController < Sinatra::Base
     end
 
     post '/users' do
+        content_type :json
 
+        user = User.new
+        user.create(params)
     end
     
     get '/users/:id' do
         content_type :json
+        
         user = User.new
-
         id = params[:id].to_i
         user.find(id).to_json
     end

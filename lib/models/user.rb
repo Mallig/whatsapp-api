@@ -3,6 +3,8 @@ require 'pg'
 
 class User
 
+    # TODO change instance methods to class methods 
+
     def find(id)
         get_users.each do |user|
             return user if (user["id"].to_s == id.to_s)
@@ -13,6 +15,11 @@ class User
 
     def all
         get_users
+    end
+
+    def create(params)
+        connection.exec("INSERT INTO users (name, password) 
+                            VALUES ('#{params[:name]}', '#{params[:password]}');")
     end
 
     private

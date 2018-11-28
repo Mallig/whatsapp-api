@@ -41,9 +41,21 @@ describe "UsersController" do
     end
 
     describe "POST /users" do
+        before(:each) do
+            @user = { "name": "tommy", "password": "rockon"}
+            @user_json = JSON.parse('{ "name": "tommy", "password": "rockon", "id": "4"}')
+        end
+
         it "connects successfully" do
-            post 'http://localhost:9292/users'
+            post 'http://localhost:9292/users', @user
             expect(last_response).to be_ok
+        end
+
+        it "adds a user to the database" do
+            post 'http://localhost:9292/users', @user
+            
+            get 'http://localhost:9292/users/4'
+            expect(JSON.parse(last_response.body)).to eq @user_json
         end
     end
 
