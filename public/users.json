@@ -1,19 +1,19 @@
 {
     "users": [
         {
-            "id": 1,
-            "name": "Mal",
-            "username": "Mallig"
+            "id": "1",
+            "name": "mal",
+            "password": "secure123"
         },
         {
-            "id": 2,
-            "name": "Hugo",
-            "username": "HugoDaBoss"
+            "id": "2",
+            "name": "hugo",
+            "password": "password"
         },
         {
-            "id": 3,
-            "name": "Toby",
-            "username": "Tobe"
+            "id": "3",
+            "name": "toby",
+            "password": "helloworld"
         }
     ]
 }

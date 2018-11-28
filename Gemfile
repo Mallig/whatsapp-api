@@ -11,4 +11,5 @@ group :development, :test do
     gem 'sinatra'
     gem 'json'
     gem 'rack-test'
+    gem 'pg'
 end

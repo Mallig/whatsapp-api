@@ -20,13 +20,12 @@ describe "UsersController" do
 
         it "returns a list of users" do
             get 'http://localhost:9292/users'
-            expect(JSON.parse(last_response.body)).to match(@users_json)
+            expect(JSON.parse(last_response.body)).to match(@users_json["users"])
         end
 
         describe "GET /:id" do
             before(:each) do
                 @user_json = @users_json["users"][0]
-                # @user_json = JSON.parse(user)
             end
 
             it "conneccts successfully" do
