@@ -1,6 +1,5 @@
 require './lib/models/user'
 require './db/setup_test_db'
-require './db/table_pops'
 
 describe User do
     before(:each) do
