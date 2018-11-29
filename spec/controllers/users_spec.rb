@@ -67,15 +67,15 @@ describe "UsersController" do
         end
     end
 
-    # describe "DELETE /users/:id" do
-    #     before(:each) do
-    #         @user = { "name": "tommy", "password": "rockon" }
-    #     end
+    describe "DELETE /users/:id" do
+        before(:each) do
+            @user = { "name": "tommy", "password": "rockon" }
+        end
 
-    #     it "connects successfully" do
-    #         DELETE 'http://localhost:9292/users', @user
-    #         expect(last_response).to be_ok
-    #     end
-    # end
+        it "connects successfully" do
+            delete 'http://localhost:9292/users', @user.to_json, {"CONTENT_TYPE" => "application/json"}
+            expect(last_response).to be_ok
+        end
+    end
 
 end

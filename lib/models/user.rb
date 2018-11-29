@@ -8,7 +8,7 @@ class User
             return user if (user["id"].to_s == id.to_s)
         end
 
-        return "404 user not found"
+        return {erorr_message: "404 user not found"}
     end
 
     def self.all
@@ -25,7 +25,12 @@ class User
         id = find_id(name)
         info = {"id": id }.merge(info)
         info
+    end
 
+    def self.delete(id)
+        user = find(id)
+        connection.exec("DELETE FROM users WHERE id = '#{id}';")
+        user
     end
 
     private
