@@ -3,9 +3,7 @@ require 'pg'
 
 class User
 
-    # TODO change instance methods to class methods 
-
-    def find(id)
+    def self.find(id)
         get_users.each do |user|
             return user if (user["id"].to_s == id.to_s)
         end
@@ -13,22 +11,30 @@ class User
         return "404 user not found"
     end
 
-    def all
+    def self.all
         get_users
     end
 
-    def create(params)
-        connection.exec("INSERT INTO users (name, password) 
-                            VALUES ('#{params[:name]}', '#{params[:password]}');")
+    def self.create(info)
+        info = JSON.parse(info)
+        name = info['name']
+        password = info['password']
+
+        connection.exec("INSERT INTO users (name, password) VALUES ('#{name}', '#{password}');")
+
+        id = find_id(name)
+        info = {"id": id }.merge(info)
+        info
+
     end
 
     private
 
-    def connection
+    def self.connection
         PG.connect(dbname: ('whatsapp' + '-' + (ENV['RACK_ENV'] || '')))
     end
 
-    def get_users
+    def self.get_users
         db_result_users = connection.exec("SELECT * FROM users")
 
         users_hash = { "users": [] }
@@ -38,6 +44,13 @@ class User
         end
 
         users_hash[:users]
+    end
+
+    def self.find_id(name)
+        res = connection.exec("SELECT id FROM users WHERE name = '#{name}'")
+        res.each do |row|
+            return row['id']
+        end
     end
 
 end

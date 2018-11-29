@@ -7,23 +7,26 @@ class UsersController < Sinatra::Base
     get '/users' do
         content_type :json
         
-        user = User.new
-        user.all.to_json
+        User.all.to_json
     end
+
 
     post '/users' do
         content_type :json
 
-        user = User.new
-        user.create(params)
+        user = request.body.read
+        
+        # user = User.create(user)
+        # user.to_json
+
+        User.create(user).to_json
     end
     
     get '/users/:id' do
         content_type :json
         
-        user = User.new
         id = params[:id].to_i
-        user.find(id).to_json
+        User.find(id).to_json
     end
 
 end

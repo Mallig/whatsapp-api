@@ -14,7 +14,7 @@ describe User do
 
     describe '.all' do
         it 'returns all users' do
-            expect(@user.all).to eq(@users_json["users"])
+            expect(User.all).to eq(@users_json["users"])
         end
     end
 
@@ -27,9 +27,10 @@ describe User do
             }')
         end
 
+        # TODO fix this vacuous test!
         it 'returns its info as json' do
-            mal = @user.find(1).to_json
-            expect(@user.find(1)).to match(@mal_json)
+            # mal = User.find(1).to_json
+            expect(User.find(1)).to match(@mal_json)
         end
     end
 end
