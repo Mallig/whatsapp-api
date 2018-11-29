@@ -3,13 +3,21 @@ require './db/setup_test_db'
 
 describe User do
     before(:each) do
-        @user = User.new
-        
         reset_table('whatsapp-test', 'users')
         populate_users_table
 
         users = File.read('public/users.json')
         @users_json = JSON.parse(users)
+
+        @test_user = '{
+            "name": "test",
+            "password": "secure123"
+        }'
+        @first_user_json = JSON.parse('{
+            "id": "1",
+            "name": "mal",
+            "password": "secure123"
+        }')
     end
 
     describe '.all' do
@@ -19,18 +27,16 @@ describe User do
     end
 
     describe '.find' do
-        before(:each) do
-            @mal_json = JSON.parse('{
-                "id": "1",
-                "name": "mal",
-                "password": "secure123"
-            }')
-        end
-
-        # TODO fix this vacuous test!
         it 'returns its info as json' do
-            # mal = User.find(1).to_json
-            expect(User.find(1)).to match(@mal_json)
+            expect(User.find(1)).to match(@first_user_json)
+        end
+    end
+
+    describe '.create' do
+        it 'returns a json of user in databse' do
+            new_user = User.create(@test_user)
+            test_user_with_id = {"id": "4"}.merge(JSON.parse(@test_user))
+            expect(new_user).to eq(test_user_with_id)
         end
     end
 end

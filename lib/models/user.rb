@@ -30,8 +30,8 @@ class User
 
     private
 
-    def self.connection
-        PG.connect(dbname: ('whatsapp' + '-' + (ENV['RACK_ENV'] || '')))
+    def self.connection(pg = PG)
+        pg.connect(dbname: ('whatsapp' + '-' + (ENV['RACK_ENV'] || '')))
     end
 
     def self.get_users

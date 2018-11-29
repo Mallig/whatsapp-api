@@ -15,10 +15,6 @@ class UsersController < Sinatra::Base
         content_type :json
 
         user = request.body.read
-        
-        # user = User.create(user)
-        # user.to_json
-
         User.create(user).to_json
     end
     
