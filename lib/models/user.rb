@@ -17,14 +17,10 @@ class User
 
     def self.create(info)
         info = JSON.parse(info)
-        name = info['name']
-        password = info['password']
-
-        connection.exec("INSERT INTO users (name, password) VALUES ('#{name}', '#{password}');")
-
-        id = find_id(name)
-        info = {"id": id }.merge(info)
-        info
+        query = "INSERT INTO users (name, password) VALUES ('#{info['name']}', '#{info['password']}');"
+        connection.exec(query)
+        id = find_id(info['name'])
+        { "id": id }.merge(info)
     end
 
     def self.delete(id)
