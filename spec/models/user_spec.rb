@@ -39,4 +39,12 @@ describe User do
             expect(new_user).to eq(test_user_with_id)
         end
     end
+
+    describe '.delete' do
+        it 'sends a delete request to the database' do
+            id = 1
+            User.delete(id)
+            expect(User.find(1)).to eq({error_message: "404 user not found"})
+        end
+    end
 end

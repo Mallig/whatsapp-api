@@ -8,7 +8,7 @@ class User
             return user if (user["id"].to_s == id.to_s)
         end
 
-        return {erorr_message: "404 user not found"}
+        return {error_message: "404 user not found"}
     end
 
     def self.all
