@@ -2,10 +2,13 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-group :development, :test do
-    gem 'rspec'
+group :production, :development, :test do
     gem 'sinatra'
     gem 'json'
-    gem 'rack-test'
     gem 'pg'
+end
+
+group :development, :test do
+    gem 'rspec'
+    gem 'rack-test'
 end
