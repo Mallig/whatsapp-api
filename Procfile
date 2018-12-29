@@ -1,1 +1,1 @@
-web: bundle exec ruby web.rb -p 9972
+web: bundle exec ruby app.rb -p 9972
