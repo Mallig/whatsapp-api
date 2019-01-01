@@ -4,7 +4,7 @@ require './lib/models/user'
 
 class UsersController < Sinatra::Base
 
-    get '/users' do        
+    get '/users' do
         content_type :json
         User.all.to_json
     end
