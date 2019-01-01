@@ -2,7 +2,6 @@ require 'json'
 require 'pg'
 
 class User
-
     def self.find(id)
         get_users.each do |user|
             return user if (user["id"].to_s == id.to_s)
@@ -12,7 +11,8 @@ class User
     end
 
     def self.all
-        get_users
+        conn = PG::Connection.open(:dbname => ENV['DATABASE_URL'])
+        res = conn.exec("SELECT * FROM pg_stat_activity")
     end
 
     def self.create(info)
@@ -31,8 +31,8 @@ class User
 
     private
 
-    def self.connection(pg = PG)
-        pg.connect(dbname: ('whatsapp' + '-' + (ENV['RACK_ENV'] || '')))
+    def self.connection
+        
     end
 
     def self.get_users
@@ -53,5 +53,4 @@ class User
             return row['id']
         end
     end
-
 end
