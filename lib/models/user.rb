@@ -11,6 +11,7 @@ class User
     end
 
     def self.all
+        puts ENV['DATABASE_URL']
         conn = PG::Connection.open(:dbname => ENV['DATABASE_URL'])
         res = conn.exec("SELECT * FROM pg_stat_activity")
     end
