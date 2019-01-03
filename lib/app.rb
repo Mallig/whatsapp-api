@@ -1,8 +1,6 @@
 require 'sinatra'
 require "./lib/controllers/users"
-
-database = 'whatsapp'
-database += '-test' if ENV['RACK_ENV'] == 'test'
+require './lib/data_mapper_setup'
 
 class WhatsAppAPI < Sinatra::Base
     use UsersController

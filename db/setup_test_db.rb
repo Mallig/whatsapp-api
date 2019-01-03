@@ -12,7 +12,6 @@ def reset_table
     connection.exec("CREATE TABLE users (ID SERIAL PRIMARY KEY,
                                          name varchar(30) UNIQUE, 
                                          password varchar(10));")
-    # connection.exec("ALTER TABLE users ADD COLUMN ID SERIAL PRIMARY KEY;")
 end
 
 def populate_users_table
