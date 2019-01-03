@@ -2,11 +2,11 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-group :production, :development, :test do
-    gem 'sinatra'
-    gem 'json'
-    gem 'pg'
-end
+gem 'data_mapper'
+gem 'dm-postgres-adapter'
+gem 'json'
+gem 'pg'
+gem 'sinatra'
 
 group :development, :test do
     gem 'rspec'
