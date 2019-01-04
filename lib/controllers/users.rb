@@ -30,11 +30,11 @@ class UsersController < Sinatra::Base
 
     delete '/users/:id' do
         id = params[:id]
-        User.delete(id).to_json
+        user = User.first(:id => id)
+        user.destroy.to_json
     end
     
     get '/users/:id' do
         User.first(:id => params[:id]).to_json
     end
-
 end
