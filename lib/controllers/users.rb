@@ -4,13 +4,15 @@ require './lib/models/user'
 
 class UsersController < Sinatra::Base
 
+    before do
+        content_type 'application/json'
+    end
+
     get '/users' do
-        content_type :json
         User.all.to_json
     end
 
     post '/users' do
-        content_type :json
         user = JSON.parse(request.body.read)
         new_or_existing_user = User.create(
             :username => user["username"],
@@ -27,13 +29,11 @@ class UsersController < Sinatra::Base
     end
 
     delete '/users/:id' do
-        content_type :json
         id = params[:id]
         User.delete(id).to_json
     end
     
     get '/users/:id' do
-        content_type :json
         User.first(:id => params[:id]).to_json
     end
 
