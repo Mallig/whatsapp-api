@@ -15,8 +15,7 @@ jobs:
       - run:
           name: Bundle
           command: |
-            sudo apt-get install postgresql-server-dev-9.4
-            bundle install
+            sudo apt-get install postgresql-server-dev-9.4 && bundle install
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
