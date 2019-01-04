@@ -15,8 +15,8 @@ class UsersController < Sinatra::Base
 
         begin
             User.create(user).to_json
-        rescue PG::UniqueViolation
-            {error: "shit ain't original, yo"}.to_json
+        
+            # {error: "shit ain't original, yo"}.to_json
         end
 
     end
