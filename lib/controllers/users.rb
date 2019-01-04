@@ -34,8 +34,7 @@ class UsersController < Sinatra::Base
     
     get '/users/:id' do
         content_type :json
-        id = params[:id].to_i
-        User.find(id).to_json
+        User.first(:id => params[:id]).to_json
     end
 
 end
