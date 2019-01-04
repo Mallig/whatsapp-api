@@ -1,5 +1,4 @@
 require 'data_mapper'
-require 'dm-postgres-adapter'
 require './lib/models/user'
 
 DataMapper::Logger.new($stdout, :debug)

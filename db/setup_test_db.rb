@@ -1,4 +1,4 @@
-require 'pg'
+# require 'pg'
 
 DBNAME = 'postgresql-amorphous-49318'
 
