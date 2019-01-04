@@ -11,14 +11,19 @@ class UsersController < Sinatra::Base
 
     post '/users' do
         content_type :json
-        user = request.body.read
-
-        begin
-            User.create(user).to_json
-        
-            # {error: "shit ain't original, yo"}.to_json
+        user = JSON.parse(request.body.read)
+        new_or_existing_user = User.create(
+            :username => user["username"],
+            :password => user["password"]
+        )
+        if new_or_existing_user.saved?
+            return {
+                :id => new_or_existing_user.id,
+                :username => new_or_existing_user.username
+            }.to_json
+        else
+            {:saved => false}.to_json 
         end
-
     end
 
     delete '/users/:id' do
