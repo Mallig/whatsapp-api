@@ -5,6 +5,7 @@ require './lib/models/user'
 class UsersController < Sinatra::Base
 
     before do
+        response['Access-Control-Allow-Origin'] = '*'
         content_type 'application/json'
     end
 
