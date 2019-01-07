@@ -45,24 +45,24 @@ describe "UsersController" do
 
     describe "POST /users" do
         before(:each) do
-            @user = { "username": "tommy", "password": "rockon" }
-            @user_json = JSON.parse('{ "username": "tommy", "password": "rockon", "id": "4" }')
+            @post_user = File.read('spec/mock_responses/post_user.json')
+            @user_json = JSON.parse('{  "id": 4, "username": "tommy"}')
         end
 
         it "connects successfully" do
-            post '/users', @user.to_json, {"CONTENT_TYPE" => "application/json"}
+            post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
             expect(last_response).to be_ok
         end
 
         it "adds a user to the database" do
-            post '/users', @user.to_json, {"CONTENT_TYPE" => "application/json"}
+            post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
             
             get '/users/4'
             expect(JSON.parse(last_response.body)).to eq @user_json
         end
 
         it "displays the new user details" do
-            post '/users', @user.to_json, {"CONTENT_TYPE" => "application/json"}
+            post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
             expect(JSON.parse(last_response.body)).to eq @user_json
         end
     end
