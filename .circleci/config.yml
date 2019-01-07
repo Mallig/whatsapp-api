@@ -25,6 +25,15 @@ jobs:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gem-cache-{{ checksum "Gemfile.lock" }}
+            - gem-cache-
       - run: 
           name: Database Setup
           command: |
@@ -43,6 +52,10 @@ jobs:
                               --out test_results/rspec.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
   deploy:
     <<: *defaults
@@ -57,12 +70,15 @@ jobs:
 
 workflows:
   version: 2
-  build_test_and_deploy:
+  build_and_deploy:
     jobs:
     - build
-    - deploy:
+    - test:
         requires:
           - build
+    - deploy:
+        requires:
+          - test
         filters:
             branches:
               only:
