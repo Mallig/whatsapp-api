@@ -27,7 +27,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      -run: 
+      - run: 
         name: Run RSpec Tests
         command: |
           echo "running tests"
