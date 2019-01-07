@@ -25,8 +25,7 @@ jobs:
       - run: 
           name: Database Setup
           command: |
-              bundle exec rake db:create db:schema:load --trace
-              bundle exec rake db:migrate
+              bundle exec rake db:auto_migrate
           environment:
             DATABASE_URL: "postgres://localhost/whatsapp_users_test"
       - run:
