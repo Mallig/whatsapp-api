@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="rspec" tests="12" skipped="0" failures="0" errors="0" time="0.209105" timestamp="2019-01-07T15:44:31+00:00" hostname="Malachys-MacBook-Pro.local">
+<properties>
+<property name="seed" value="28972"/>
+</properties>
+<testcase classname="spec.controllers.app_spec" name="WhatsAppUsers connects successfully" file="./spec/controllers/app_spec.rb" time="0.016431"></testcase>
+<testcase classname="spec.controllers.app_spec" name="WhatsAppUsers says hello world" file="./spec/controllers/app_spec.rb" time="0.001594"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController GET /users connects successfully" file="./spec/controllers/users_spec.rb" time="0.029872"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController GET /users returns a list of users without the password" file="./spec/controllers/users_spec.rb" time="0.017952"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController GET /users GET /:id connects successfully" file="./spec/controllers/users_spec.rb" time="0.017047"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController GET /users GET /:id returns details about a single user" file="./spec/controllers/users_spec.rb" time="0.017353"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController POST /users when passed valid data connects successfully" file="./spec/controllers/users_spec.rb" time="0.018956"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController POST /users when passed valid data adds a user to the database" file="./spec/controllers/users_spec.rb" time="0.018385"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController POST /users when passed valid data displays the new user details" file="./spec/controllers/users_spec.rb" time="0.016500"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController POST /users when passed invalid data returns failed save json" file="./spec/controllers/users_spec.rb" time="0.015652"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController DELETE /users/:id connects successfully" file="./spec/controllers/users_spec.rb" time="0.019791"></testcase>
+<testcase classname="spec.controllers.users_spec" name="UsersController DELETE /users/:id returns db row as json" file="./spec/controllers/users_spec.rb" time="0.017174"></testcase>
+</testsuite>

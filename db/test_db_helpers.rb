@@ -1,8 +1,5 @@
 require './lib/models/user'
-
-DBNAME = 'whatsapp_users_test'
-
-# DataMapper.auto_migrate! if ENV['RACK_ENV'] == 'test'
+require './lib/data_mapper_setup'
 
 def users_pop
     JSON.parse(File.read('public/database_populator.json'))["users"]
@@ -17,6 +14,3 @@ def populate_users
         User.create(username: row["username"], password: row["password"])
     end
 end
-
-clear_users
-populate_users
