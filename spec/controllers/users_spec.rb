@@ -13,7 +13,7 @@ describe "UsersController" do
 
     def app
         UsersController.new
-    endexit
+    end
 
     describe "GET /users" do
         it "connects successfully" do
