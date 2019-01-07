@@ -22,12 +22,14 @@ jobs:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
-  test:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: rspec
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
   deploy:
     <<: *defaults
@@ -45,9 +47,6 @@ workflows:
   build_test_and_deploy:
     jobs:
     - build
-    - test:
-        requires:
-          - build
     - deploy:
         requires:
           - build
