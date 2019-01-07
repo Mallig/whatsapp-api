@@ -46,24 +46,34 @@ describe "UsersController" do
     describe "POST /users" do
         before(:each) do
             @post_user = File.read('spec/mock_responses/post_user.json')
+            @post_invalid_user = File.read('spec/mock_responses/post_invalid_user.json')
             @user_json = JSON.parse('{ "id": 4, "username": "tommy"}')
         end
 
-        it "connects successfully" do
-            post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
-            expect(last_response).to be_ok
+        context 'when passed valid data' do
+            it "connects successfully" do
+                post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
+                expect(last_response).to be_ok
+            end
+
+            it "adds a user to the database" do
+                post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
+                
+                get '/users/4'
+                expect(JSON.parse(last_response.body)).to eq @user_json
+            end
+
+            it "displays the new user details" do
+                post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
+                expect(JSON.parse(last_response.body)).to eq @user_json
+            end
         end
 
-        it "adds a user to the database" do
-            post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
-            
-            get '/users/4'
-            expect(JSON.parse(last_response.body)).to eq @user_json
-        end
-
-        it "displays the new user details" do
-            post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
-            expect(JSON.parse(last_response.body)).to eq @user_json
+        context 'when passed invalid data' do
+            it 'returns failed save json' do
+                post '/users', @post_invalid_user, {"CONTENT_TYPE" => "application/json"}
+                expect(JSON.parse(last_response.body)).to eq(JSON.parse({:saved => false}.to_json))
+            end
         end
     end
 
