@@ -37,7 +37,9 @@ jobs:
       - run: 
           name: Database Setup
           command: |
+            sudo apt-get update
             sudo apt-get install postgresql
+            bundle install
             sudo service postgresql start
             sudo psql -h localhost -U postgres -c "create database $DATABASE_NAME"
           environment:
