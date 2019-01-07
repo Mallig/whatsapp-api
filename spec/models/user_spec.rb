@@ -1,10 +1,10 @@
 require './lib/models/user'
-require './db/setup_test_db'
+# require './db/setup_test_db'
 
 describe User do
     before(:each) do
-        reset_table('whatsapp-test', 'users')
-        populate_users_table
+        # reset_table('whatsapp-test', 'users')
+        # populate_users_table
 
         users = File.read('public/users.json')
         @users_json = JSON.parse(users)

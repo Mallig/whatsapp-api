@@ -1,10 +1,10 @@
 require 'spec_helper'
-require_relative '../../app.rb'
+require_relative '../../lib/app.rb'
 
-describe "WhatsAppAPI" do
+describe "WhatsAppUsers" do
 
     def app
-        WhatsAppAPI.new
+        WhatsAppUsers.new
     end
 
     it "connects successfully" do
@@ -14,7 +14,7 @@ describe "WhatsAppAPI" do
 
     it "says hello world" do
         get 'http://localhost:9292/'
-        expect(last_response.body).to include("Hello World, from API")
+        expect(last_response.body).to include("Hello World, from users API")
     end
 
 end

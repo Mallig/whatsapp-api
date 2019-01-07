@@ -10,7 +10,11 @@ class UsersController < Sinatra::Base
     end
 
     get '/users' do
-        User.all.to_json
+        users = []
+        User.all(:fields => [:id, :username]).each do |user|
+            users.push(translate_user(user))
+        end
+        users.to_json
     end
 
     post '/users' do
@@ -36,6 +40,16 @@ class UsersController < Sinatra::Base
     end
     
     get '/users/:id' do
-        User.first(:id => params[:id]).to_json
+        user = User.first(:id => params[:id], :fields => [:id, :username])
+        translate_user(user).to_json
+    end
+
+    private
+
+    def translate_user(user)
+        return {
+            :id => user[:id],
+            :username => user[:username]
+        }
     end
 end
