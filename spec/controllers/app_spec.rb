@@ -1,6 +1,8 @@
 require 'spec_helper'
 require_relative '../../lib/app.rb'
 
+url = 'http://localhost:9292/'
+
 describe "WhatsAppUsers" do
 
     def app
@@ -8,13 +10,12 @@ describe "WhatsAppUsers" do
     end
 
     it "connects successfully" do
-        get 'http://localhost:9292/'
+        get url
         expect(last_response).to be_ok
     end
 
     it "says hello world" do
-        get 'http://localhost:9292/'
+        get url
         expect(last_response.body).to include("Hello World, from users API")
     end
-
 end
