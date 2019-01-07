@@ -35,6 +35,8 @@ jobs:
             DATABASE_NAME: "whatsapp_users_test"
       - run:
           name: Run rspec in parallel
+          environment:
+            DATABASE_URL: "postgres://postgres@localhost/whatsapp_users_test"
           command: |
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
