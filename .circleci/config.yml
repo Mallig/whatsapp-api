@@ -27,11 +27,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: 
-        name: Run RSpec Tests
-        command: |
-          echo "running tests"
-          rspec
+      - run: rspec
 
   deploy:
     <<: *defaults
@@ -52,4 +48,5 @@ workflows:
     - test
     - deploy:
         requires:
+          - test
           - build
