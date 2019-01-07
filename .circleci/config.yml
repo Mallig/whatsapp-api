@@ -19,7 +19,7 @@ jobs:
           name: Bundle
           command: |
             sudo apt-get update
-            sudo apt-get install postgresql
+            sudo apt-get install postgresql-server-dev-9.4
             bundle install
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
@@ -28,6 +28,7 @@ jobs:
       - run: 
           name: Database Setup
           command: |
+            sudo apt-get install postgresql
             service postgresql start
             sudo psql -U postgres -c "CREATE DATABASE whatsapp_users_test"
           environment:
