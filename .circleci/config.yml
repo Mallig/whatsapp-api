@@ -29,7 +29,7 @@ jobs:
           name: Database Setup
           command: |
             sudo apt-get install postgresql
-            service postgresql start
+            sudo service postgresql start
             sudo psql -U postgres -c "CREATE DATABASE whatsapp_users_test"
           environment:
             DATABASE_URL: "postgres://postgres@localhost/whatsapp_users_test"
