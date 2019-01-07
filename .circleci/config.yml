@@ -27,8 +27,8 @@ jobs:
           command: |
               bundle exec rake db:create db:schema:load --trace
               bundle exec rake db:migrate
-        environment:
-          DATABASE_URL: "postgres://localhost/whatsapp_users_test"
+          environment:
+            DATABASE_URL: "postgres://localhost/whatsapp_users_test"
       - run:
           name: Run rspec in parallel
           command: |
