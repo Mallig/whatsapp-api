@@ -46,7 +46,7 @@ describe "UsersController" do
     describe "POST /users" do
         before(:each) do
             @post_user = File.read('spec/mock_responses/post_user.json')
-            @user_json = JSON.parse('{  "id": 4, "username": "tommy"}')
+            @user_json = JSON.parse('{ "id": 4, "username": "tommy"}')
         end
 
         it "connects successfully" do
@@ -69,8 +69,7 @@ describe "UsersController" do
 
     describe "DELETE /users/:id" do
         before(:each) do
-            @user = { "name": "mal", "password": "secure123" }
-            @user_json = JSON.parse('{ "id": "1", "name": "mal", "password": "secure123" }')
+            @user_json = JSON.parse('{ "id": 1, "username": "mal" }')
         end
 
         it "connects successfully" do

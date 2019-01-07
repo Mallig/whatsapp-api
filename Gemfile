@@ -12,3 +12,7 @@ group :development, :test do
     gem 'rspec'
     gem 'rack-test'
 end
+
+group :test do
+    gem 'simplecov', require: false
+end

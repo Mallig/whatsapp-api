@@ -34,9 +34,10 @@ class UsersController < Sinatra::Base
     end
 
     delete '/users/:id' do
-        id = params[:id]
-        user = User.first(:id => id)
-        user.destroy.to_json
+        user = User.first(:id => params[:id], :fields => [:id, :username])
+        res = translate_user(user)
+        user.destroy
+        return res.to_json
     end
     
     get '/users/:id' do
