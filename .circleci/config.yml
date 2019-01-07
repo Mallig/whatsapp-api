@@ -30,9 +30,9 @@ jobs:
           command: |
             sudo apt-get install postgresql
             sudo service postgresql start
-            sudo psql -U postgres -c "CREATE DATABASE whatsapp_users_test"
+            sudo psql -h localhost -U postgres -c "create database $DATABASE_NAME"
           environment:
-            DATABASE_URL: "postgres://postgres@localhost/whatsapp_users_test"
+            DATABASE_NAME: "whatsapp_users_test"
       - run:
           name: Run rspec in parallel
           command: |
