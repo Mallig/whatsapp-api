@@ -10,7 +10,7 @@ class UsersController < Sinatra::Base
     end
 
     get '/users' do
-        users = [
+        blah = [
             {
                 :username => "Jon",
                 :password => "password123"
@@ -49,12 +49,15 @@ class UsersController < Sinatra::Base
             }
         ]
 
-        users.each do |user|
-            User.create(
-                :username => user[:username],
-                :password => user[:password]
-            )
+        if ENV['RACK_ENV'] != 'test'
+            blah.each do |user|
+                User.create(
+                    :username => user[:username],
+                    :password => user[:password]
+                )
+            end
         end
+        users = []
         User.all(:fields => [:id, :username]).each do |user|
             users.push(translate_user(user))
         end
