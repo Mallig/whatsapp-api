@@ -1,4 +1,5 @@
 require 'sinatra'
+require './lib/response_messages'
 require './lib/login/login_service'
 
 class LoginController < Sinatra::Base
@@ -12,7 +13,7 @@ class LoginController < Sinatra::Base
         if req != ""
             return LoginService.login(JSON.parse(req)).to_json
         else
-            return {:message => "ain't provided nothin yo"}.to_json
+            return {:message => ResponseMessages::NOTHING_PROVIDED}.to_json
         end
     end
 end

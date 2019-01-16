@@ -1,7 +1,7 @@
-require 'spec_helper'
 require './lib/users/user'
-require './lib/login/login_messages'
 require './lib/data_mapper_setup'
+require './lib/login/login_messages'
+require './lib/response_messages'
 
 describe "LoginController" do
 
@@ -22,15 +22,23 @@ describe "LoginController" do
             }.to_json
             post "/login", parameters
             expect(JSON.parse(last_response.body)["message"]).to eq LoginMessages::SUCCESS
+            expect(last_response.status).to eq 200
         end
 
-        it "returns negative message when user logs in" do
+        it "returns negative message when user gets something wrong" do
             parameters = {
                 "username": "Mal",
                 "password": "password1234"
             }.to_json
             post "/login", parameters
             expect(JSON.parse(last_response.body)["message"]).to eq LoginMessages::FAILURE
+            expect(last_response.status).to eq 200
+        end
+
+        it "returns messages saying nothing provided" do
+            post "/login"
+            expect(JSON.parse(last_response.body)["message"]).to eq ResponseMessages::NOTHING_PROVIDED
+            expect(last_response.status).to eq 200
         end
     end
 end
