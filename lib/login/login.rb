@@ -1,4 +1,5 @@
 require 'sinatra'
+require './lib/login/login_service'
 
 class LoginController < Sinatra::Base
 
@@ -9,8 +10,7 @@ class LoginController < Sinatra::Base
     post '/login' do
         req = request.body.read
         unless req == ""
-            body = JSON.parse(req)
-            return body.to_json
+            return LoginService.login(JSON.parse(req)).to_json
         end
         return nil
     end

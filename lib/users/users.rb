@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'json'
-require './lib/models/user'
+require './lib/users/user'
 
 class UsersController < Sinatra::Base
 
