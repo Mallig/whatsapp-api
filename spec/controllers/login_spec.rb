@@ -1,5 +1,6 @@
 require 'spec_helper'
 require './lib/users/user'
+require './lib/data_mapper_setup'
 
 describe "LoginController" do
 
@@ -8,6 +9,7 @@ describe "LoginController" do
     end
 
     before do
+        DataMapper.auto_migrate!
         User.create(:username => "Mal", :password => "password123")
     end
 
