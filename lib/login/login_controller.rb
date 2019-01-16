@@ -9,9 +9,10 @@ class LoginController < Sinatra::Base
 
     post '/login' do
         req = request.body.read
-        unless req == ""
+        if req != ""
             return LoginService.login(JSON.parse(req)).to_json
+        else
+            return {:message => "ain't provided nothin yo"}.to_json
         end
-        return nil
     end
 end
