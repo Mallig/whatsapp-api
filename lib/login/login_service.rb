@@ -1,16 +1,19 @@
 require './lib/users/user'
+require './lib/login/login_messages'
 
 module LoginService
     class << self
         def login(req)
             user = User.first(:username => req["username"])
-            message = { "message": "you got something wrong mate" }
+            response = {}
             unless user.nil?
-                message = {
-                    "message": "Hooray you've been logged in!"
-                } if user[:password] == req["password"]
+                if user[:password] == req["password"]
+                    response["message"] = LoginMessages::SUCCESS
+                else
+                    response["message"] = LoginMessages::FAILURE
+                end
             end
-            return message
+            return response
         end
     end
 end
