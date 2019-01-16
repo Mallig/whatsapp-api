@@ -14,3 +14,13 @@ def populate_users
         User.create(username: row["username"], password: row["password"])
     end
 end
+
+@headers = {"Content-Type" => "application/json"}
+
+def post_with_headers(path, body)
+    post path, body, @headers
+end
+
+def get_with_headers(path, body=nil)
+    get path, body, @headers
+end

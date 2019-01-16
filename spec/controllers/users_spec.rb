@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './db/test_db_helpers'
+require './spec/test_helper'
 
 describe "UsersController" do
     before(:each) do
@@ -16,12 +16,12 @@ describe "UsersController" do
 
     describe "GET /users" do
         it "connects successfully" do
-            get '/users', nil, @headers
+            get_with_headers '/users'
             expect(last_response).to be_ok
         end
 
         it "returns a list of users without the password" do
-            get '/users', nil, @headers
+            get_with_headers '/users'
             expect(JSON.parse(last_response.body)).to eq(@users_json["users"])
         end
 
@@ -31,12 +31,12 @@ describe "UsersController" do
             end
 
             it "connects successfully" do
-                get '/users/1', nil, @headers
+                get_with_headers '/users/1'
                 expect(last_response).to be_ok
             end
 
             it "returns details about a single user" do
-                get '/users/1', nil, @headers
+                get_with_headers '/users/1'
                 expect(JSON.parse(last_response.body)).to match(@user_json)
             end
         end
@@ -51,26 +51,26 @@ describe "UsersController" do
 
         context 'when passed valid data' do
             it "connects successfully" do
-                post '/users', @post_user, @headers
+                post_with_headers '/users', @post_user
                 expect(last_response).to be_ok
             end
 
             it "adds a user to the database" do
-                post '/users', @post_user, @headers
+                post_with_headers '/users', @post_user
                 
-                get '/users/4', nil, @headers
+                get_with_headers '/users/4'
                 expect(JSON.parse(last_response.body)).to eq @user_json
             end
 
             it "displays the new user details" do
-                post '/users', @post_user, @headers
+                post_with_headers '/users', @post_user
                 expect(JSON.parse(last_response.body)).to eq @user_json
             end
         end
 
         context 'when passed invalid data' do
             it 'returns failed save json' do
-                post '/users', @post_invalid_user, @headers
+                post_with_headers '/users', @post_invalid_user
                 expect(JSON.parse(last_response.body)).to eq(JSON.parse({:saved => false}.to_json))
             end
         end
