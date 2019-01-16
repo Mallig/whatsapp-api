@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../lib/controllers/users'
+require_relative '../../lib/users/users'
 require './db/test_db_helpers'
 
 

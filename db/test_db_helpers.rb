@@ -1,4 +1,4 @@
-require './lib/models/user'
+require './lib/users/user'
 require './lib/data_mapper_setup'
 
 def users_pop
