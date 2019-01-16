@@ -3,11 +3,6 @@ require './lib/response_messages'
 require './lib/login/login_service'
 
 class LoginController < SecureController
-
-    before do
-        headers "Content-Type" => 'application/json'
-    end
-
     post '/login' do
         req = request.body.read
         if req != ""

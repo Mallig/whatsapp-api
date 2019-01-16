@@ -4,11 +4,6 @@ require './lib/users/user'
 
 class UsersController < SecureController
 
-    before do
-        response['Access-Control-Allow-Origin'] = '*'
-        content_type 'application/json'
-    end
-
     get '/users' do
         users = []
         User.all(:fields => [:id, :username]).each do |user|
