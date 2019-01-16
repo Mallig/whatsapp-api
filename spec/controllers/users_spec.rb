@@ -1,7 +1,5 @@
 require 'spec_helper'
-require_relative '../../lib/users/users_controller'
 require './db/test_db_helpers'
-
 
 describe "UsersController" do
     before(:each) do
