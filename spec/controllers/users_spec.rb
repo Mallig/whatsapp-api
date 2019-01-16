@@ -3,6 +3,7 @@ require './db/test_db_helpers'
 
 describe "UsersController" do
     before(:each) do
+        @headers = {'Content-Type' => 'application/json'}
         get_users = File.read('spec/mock_responses/get_users.json')
         @users_json = JSON.parse(get_users)
         DataMapper.auto_migrate!
@@ -15,12 +16,12 @@ describe "UsersController" do
 
     describe "GET /users" do
         it "connects successfully" do
-            get '/users'
+            get '/users', nil, @headers
             expect(last_response).to be_ok
         end
 
         it "returns a list of users without the password" do
-            get '/users'
+            get '/users', nil, @headers
             expect(JSON.parse(last_response.body)).to eq(@users_json["users"])
         end
 
@@ -30,12 +31,12 @@ describe "UsersController" do
             end
 
             it "connects successfully" do
-                get '/users/1'
+                get '/users/1', nil, @headers
                 expect(last_response).to be_ok
             end
 
             it "returns details about a single user" do
-                get '/users/1'
+                get '/users/1', nil, @headers
                 expect(JSON.parse(last_response.body)).to match(@user_json)
             end
         end
@@ -50,26 +51,26 @@ describe "UsersController" do
 
         context 'when passed valid data' do
             it "connects successfully" do
-                post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
+                post '/users', @post_user, @headers
                 expect(last_response).to be_ok
             end
 
             it "adds a user to the database" do
-                post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
+                post '/users', @post_user, @headers
                 
-                get '/users/4'
+                get '/users/4', nil, @headers
                 expect(JSON.parse(last_response.body)).to eq @user_json
             end
 
             it "displays the new user details" do
-                post '/users', @post_user, {"CONTENT_TYPE" => "application/json"}
+                post '/users', @post_user, @headers
                 expect(JSON.parse(last_response.body)).to eq @user_json
             end
         end
 
         context 'when passed invalid data' do
             it 'returns failed save json' do
-                post '/users', @post_invalid_user, {"CONTENT_TYPE" => "application/json"}
+                post '/users', @post_invalid_user, @headers
                 expect(JSON.parse(last_response.body)).to eq(JSON.parse({:saved => false}.to_json))
             end
         end
@@ -81,12 +82,12 @@ describe "UsersController" do
         end
 
         it "connects successfully" do
-            delete '/users/1'
+            delete '/users/1', nil, @headers
             expect(last_response).to be_ok
         end
 
         it "returns db row as json" do
-            delete '/users/1'
+            delete '/users/1', nil, @headers
             expect(JSON.parse(last_response.body)).to eq @user_json
         end
     end

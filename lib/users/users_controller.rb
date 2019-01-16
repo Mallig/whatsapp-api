@@ -1,8 +1,8 @@
-require 'sinatra'
 require 'json'
+require './lib/secure_controller'
 require './lib/users/user'
 
-class UsersController < Sinatra::Base
+class UsersController < SecureController
 
     before do
         response['Access-Control-Allow-Origin'] = '*'

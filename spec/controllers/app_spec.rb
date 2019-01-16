@@ -10,12 +10,12 @@ describe "WhatsAppUsers" do
     end
 
     it "connects successfully" do
-        get url
+        get url, nil, {"Content-Type" => 'application/json'}
         expect(last_response).to be_ok
     end
 
     it "says hello world" do
-        get url
+        get url, nil, {"Content-Type" => 'application/json'}
         expect(last_response.body).to include("Hello World, from users API")
     end
 end

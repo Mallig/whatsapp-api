@@ -3,7 +3,7 @@ require './lib/login/login_messages'
 
 class LoginService
     def self.login(req)
-        user = User.first(:username => req["username"])
+        user = User.first(:fields => [:password], :username => req["username"])
         response = {}
         unless user.nil?
             if user[:password] == req["password"]

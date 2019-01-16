@@ -1,11 +1,11 @@
-require 'sinatra'
+require './lib/secure_controller'
 require './lib/response_messages'
 require './lib/login/login_service'
 
-class LoginController < Sinatra::Base
+class LoginController < SecureController
 
     before do
-        content_type 'application/json'
+        headers "Content-Type" => 'application/json'
     end
 
     post '/login' do
