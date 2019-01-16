@@ -1,6 +1,6 @@
 require 'sinatra'
-require './lib/users/users'
-require './lib/login/login'
+require './lib/users/users_controller'
+require './lib/login/login_controller'
 
 class WhatsAppUsers < Sinatra::Base
     use UsersController
