@@ -3,18 +3,18 @@ require './lib/users/user_service'
 
 class UsersController < SecureController
     get '/users' do
-        UserService.all_users
+        UserService.find_all_users
     end
 
     post '/users' do
-        UserService.create(JSON.parse(request.body.read))
+        UserService.add_user(JSON.parse(request.body.read))
     end
     
     get '/users/:id' do
-        UserService.first(params[:id])
+        UserService.find_user(params[:id])
     end
 
     delete '/users/:id' do
-        UserService.delete(params[:id])
+        UserService.remove_user(params[:id])
     end
 end

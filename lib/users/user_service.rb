@@ -2,7 +2,7 @@ require './lib/users/user'
 
 module UserService
     class << self
-        def all_users
+        def find_all_users
             users = []
             User.all(:fields => [:id, :username]).each do |user|
                 users.push(translate_user(user))
@@ -10,7 +10,7 @@ module UserService
             users.to_json
         end
 
-        def create(user)
+        def add_user(user)
             new_or_existing_user = User.create(
                 :username => user["username"],
                 :password => user["password"]
@@ -25,12 +25,12 @@ module UserService
             end
         end
 
-        def first(id)
+        def find_user(id)
             user = User.first(:id => id, :fields => [:id, :username])
             translate_user(user).to_json
         end
 
-        def delete(id)
+        def remove_user(id)
             user = User.first(:id => id, :fields => [:id, :username])
             res = translate_user(user)
             user.destroy
