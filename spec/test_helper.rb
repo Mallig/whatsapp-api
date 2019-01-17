@@ -15,12 +15,10 @@ def populate_users
     end
 end
 
-@headers = {"Content-Type" => "application/json"}
-
 def post_with_headers(path, body)
-    post path, body, @headers
+    post path, body, "Content-Type" => "application/json"
 end
 
 def get_with_headers(path, body=nil)
-    get path, body, @headers
+    get path, body, "Content-Type" => "application/json"
 end
